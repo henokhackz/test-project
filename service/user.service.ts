@@ -4,6 +4,7 @@ import type { CreateUserDTO } from '../dtos/user.dto.js';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import logger from '../utils/logger.js';
+import ApiError from '../utils/api-error.js';
 
 const CACHE_FILE = './users-cache.json';
 
@@ -50,6 +51,15 @@ export const createUserService = async (data: CreateUserDTO) =>
     const userData = { name, email, password: hashedPassword };
 
     try {
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (existingUser) {
+        throw new ApiError(400, 'User with this email already exists');
+      }
+
       const { password: userPassword, ...rest } = await prisma.user.create({
         data: userData,
       });
