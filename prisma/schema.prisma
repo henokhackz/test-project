@@ -1,0 +1,27 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id      Int      @id @default(autoincrement())
+  name    String
+  password String
+  email  String   @unique
+  progress Progress[]
+}
+
+model Progress {
+  id       Int    @id @default(autoincrement())
+  lesson   String
+  score    Int
+  user_id  Int
+  user     User   @relation(fields: [user_id], references: [id])
+}
