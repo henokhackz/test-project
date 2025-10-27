@@ -1,4 +1,4 @@
-# User & Progress API — Offline-First Backend
+# User & Progress API  Offline-First Backend
 
 This is a small backend project for managing users and their progress. It supports offline first behavior, allowing data to be temporarily stored locally if the database is unavailable, and synced later.
 
@@ -27,19 +27,17 @@ cd test-project
 ```
 
 2. Install dependencies
+   
    npm install
 
-3. Set up environment variables
+4. Set up environment variables
 
-Create a .env file in the root folder and specify the following:
+Create a change .env.example file into .env file in  the root folder and specify the following:
 
-PORT=5000 # You can change this to any available port
-DATABASE_URL="file:./dev.db" # Prisma SQLite DB 4. Set up Prisma
-
-Generate Prisma client and apply initial migrations:
-
-npx prisma generate
-npx prisma migrate dev --name init
+PORT=5000 
+# You can change this to any available port
+DATABASE_URL="file:./dev.db" 
+# Prisma SQLite DB 
 
 4. Set up Prisma
 
@@ -66,7 +64,7 @@ Ensure both files contain an empty array [] as the initial content:
 
 []
 
-⚡ Running the Project
+Running the Project
 
 Start the server:
 
@@ -86,11 +84,9 @@ POST /users
 
 Request Body:
 
-{
-"email":"john@gmail.com",
+{ "email":"john@gmail.com",
 "password":"135345345",
-"name":"john the dev"
-}
+"name":"john the dev"  }
 
 Response:
 
@@ -165,7 +161,7 @@ Response:
 ]
 }
 
-📝 Offline-First Behavior
+Offline-First Behavior
 
 When creating users or progress, if the database is unreachable, the API saves data locally in users-cache.json or progress-cache.json.
 
